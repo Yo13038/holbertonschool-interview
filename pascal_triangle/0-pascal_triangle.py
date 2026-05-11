@@ -1,6 +1,13 @@
 #!/usr/bin/python3
+"""
+function that create a pascal-triangle.
+"""
+
 
 def pascal_triangle(n):
+    """
+    return a list of lists of integers in pascal-triangle shape
+    """
     if n <= 0:
         return []
 
