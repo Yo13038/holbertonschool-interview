@@ -58,7 +58,9 @@ def parse_log():
             # display after every 10 valid lines
             if line_count % 10 == 0:
                 show_stats(total_size)
-    
+
+        show_stats(total_size)
+        
     except KeyboardInterrupt:
         # Handle CTRL+C
         show_stats(total_size)
