@@ -41,19 +41,18 @@ def parse_log():
                 file_size = int(parsed_line[-1])
                 status_code = int(parsed_line[-2])
                 
-
-                # Accumulate the total file size
-                total_size += file_size
                 
                 # Increment status code count
                 if status_code in status_codes:
                     status_codes[status_code] += 1
-            
+
+                # Accumulate the total file size
+                total_size += file_size
+                
                 # Increment the valided lines counter
                 line_count += 1
 
-            except (ValueError, IndexError):
-                # Format is invalid, skip the line safely
+            except (ValueError, IndexError):# Format is invalid, skip the line safely
                 continue
 
             # display after every 10 valid lines
@@ -62,8 +61,7 @@ def parse_log():
 
         show_stats(total_size)
 
-    except KeyboardInterrupt:
-        # Handle CTRL+C
+    except KeyboardInterrupt: # Handle CTRL+C
         show_stats(total_size)
         raise
 
