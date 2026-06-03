@@ -10,7 +10,7 @@ status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
 
 # Regex matching the exact expected format
 LOG_PATTERN = re.compile(
-    r'^\d+\.\d+\.\d+\.\d+ - \[.+\] "GET /projects/260 HTTP/1\.1" \d+ \d+$'
+    r'^\d+\.\d+\.\d+\.\d+ - \[.+\] "GET .+ HTTP/1\.1" \d+ \d+$'
 )
 
 
