@@ -47,10 +47,10 @@ def parse_log():
                     status_codes[status_code] += 1
 
                 # Accumulate the total file size
-                total_size += file_size
+                    total_size += file_size
                 
                 # Increment the valided lines counter
-                line_count += 1
+                    line_count += 1
 
             except (ValueError, IndexError):# Format is invalid, skip the line safely
                 continue
