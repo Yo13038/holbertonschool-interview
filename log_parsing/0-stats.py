@@ -38,8 +38,9 @@ def parse_log():
             
             try:
                 # Extract status using negative indexing
-                status_code = int(parsed_line[-2])
                 file_size = int(parsed_line[-1])
+                status_code = int(parsed_line[-2])
+                
 
                 # Accumulate the total file size
                 total_size += file_size
@@ -60,7 +61,7 @@ def parse_log():
                 show_stats(total_size)
 
         show_stats(total_size)
-        
+
     except KeyboardInterrupt:
         # Handle CTRL+C
         show_stats(total_size)
