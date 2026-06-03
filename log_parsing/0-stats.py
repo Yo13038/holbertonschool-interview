@@ -4,7 +4,6 @@ Module to handle log parsing
 """
 import sys
 
-# Global dictionary to track the count of each valid status code
 status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
 
 
@@ -27,36 +26,38 @@ def parse_log():
 
     try:
         for line in sys.stdin:
+            # Nettoie la ligne et la découpe
             parsed_line = line.split()
 
-            # A valid line according to the generator format must have at least 2 elements at the end
             if len(parsed_line) < 2:
                 continue
             
             try:
-                # Read from the end of the list
+                # Extraction depuis la fin
                 file_size = int(parsed_line[-1])
                 status_code = int(parsed_line[-2])
-
-                # Always add the file size if the line format is valid (integers found)
+                
+                # Une ligne est valide si le statut et la taille sont des entiers.
+                # On ajoute donc TOUJOURS sa taille au total.
                 total_size += file_size
                 
+                # On incrémente le dictionnaire UNIQUEMENT si le code est suivi
                 if status_code in status_codes:
                     status_codes[status_code] += 1
             
-                # Increment the general line counter
+                # On incrémente le compteur de lignes pour le déclencheur des 10 lignes
                 line_count += 1
 
             except (ValueError, IndexError):
                 continue
 
-            # Print every 10 lines
+            # Affichage toutes les 10 lignes valides
             if line_count % 10 == 0:
                 show_stats(total_size)
-        
-        # Print final remaining stats at EOF
+
+        # Affichage final à la fin du flux (EOF)
         show_stats(total_size)
-    
+
     except KeyboardInterrupt:
         show_stats(total_size)
         raise
